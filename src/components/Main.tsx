@@ -33,6 +33,8 @@ function Main({mode}:MainProps) {
     }
   };
 
+  console.log(user)
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
     event.preventDefault();
     setUserName(event.target.value)
@@ -42,6 +44,12 @@ function Main({mode}:MainProps) {
     e.preventDefault();
     getUserName();
   }
+
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return 'N/A';
+    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
 
   return (
@@ -68,7 +76,7 @@ function Main({mode}:MainProps) {
             <div className="info">
               <h2>{user?.name}</h2>
               <a href="#">@{user?.login}</a>
-              <p>joined {user?.created_at}</p>
+              <p>joined {formatDate(user?.created_at)}</p>
             </div>
           </div>
 
@@ -90,19 +98,19 @@ function Main({mode}:MainProps) {
           <div className="links">
             <div>
               <img src={LocationIcon} alt="location icon" />
-              <a href="#">{user?.location}</a>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${user?.location}`}>{user?.location || 'Not Available'}</a>
             </div>
             <div>
               <img src={WebsiteIcon} alt="website icon" />
-              <a href="#">{user?.blog}</a>
+              <a href='#'>{user?.blog || "Not Available"}</a>
             </div>
             <div className="twitter">
               <img src={TwitterIcon} alt="twitter icon" />
-              <a href="#">{user?.twitter_username}</a>
+              <a href={user?.twitter_username ? `https://twitter.com/${user?.twitter_username}` : '#'}>{user?.twitter_username || 'Not Available'}</a>
             </div>
             <div>
               <img src={CompanyIcon} alt="company icon" />
-              <a href="#">{user?.company}</a>
+              <a href="#">{user?.company || 'Not Available'}</a>
             </div>
           </div>
         </div>

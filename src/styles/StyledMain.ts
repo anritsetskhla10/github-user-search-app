@@ -8,9 +8,9 @@ const StyledMain = styled.main<IMain>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 79px;
+    padding: 0 24px 79px;
 
-    z.main-container{
+    .main-container{
         width: 327px;
         padding: 32px 24px 48px;
         border-radius: 15px;

@@ -14,11 +14,12 @@ const StyledForm = styled.form<IForm>`
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
 
     & > div{
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 11px;
     }
     img{
         width: 20px;
@@ -42,11 +43,13 @@ const StyledForm = styled.form<IForm>`
     }
 
     .error{
-        font-size: 15px;
+        font-size: 11px;
         font-weight: bold;
         color: #f74646;
         margin: 0;
         white-space: nowrap;
+        position: absolute;
+        right: 100px;
     }
 
      button{
@@ -70,6 +73,12 @@ const StyledForm = styled.form<IForm>`
         margin: 36px 0 24px;
         justify-content: space-between;
 
+        & > div{
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        }
+
         img{
         width: 24px;
         height: 24px;
@@ -89,6 +98,11 @@ const StyledForm = styled.form<IForm>`
          button{
             padding: 12.5px 23px 13.5px 24px;
             font-size: 16px;
+        }
+
+        .error{
+            font-size: 15px;
+            position:unset;
         }
 
     }
