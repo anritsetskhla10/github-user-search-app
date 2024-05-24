@@ -7,6 +7,7 @@ import WebsiteIcon from '/images/icon-website.svg';
 import LocationIcon from '/images/icon-location.svg';
 import { GithubUser, MainProps } from "../types";
 import { useEffect, useState, FormEvent} from "react";
+import styled from "styled-components";
 
 
 
@@ -47,8 +48,14 @@ function Main({mode}:MainProps) {
 
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return 'N/A';
-    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    
+    const date = new Date(dateString);
+    
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+    
+    return `${day} ${month} ${year}`;
   };
 
 
@@ -98,24 +105,42 @@ function Main({mode}:MainProps) {
           <div className="links">
             <div>
               <img src={LocationIcon} alt="location icon" />
-              <a href={`https://www.google.com/maps/search/?api=1&query=${user?.location}`}>{user?.location || 'Not Available'}</a>
+              <StyledLinks mode={mode} available={!!user?.location} href={`https://www.google.com/maps/search/?api=1&query=${user?.location}`}>{user?.location || 'Not Available'}</StyledLinks>
             </div>
             <div>
               <img src={WebsiteIcon} alt="website icon" />
-              <a href='#'>{user?.blog || "Not Available"}</a>
+              <StyledLinks mode={mode} available={!!user?.blog} href='#'>{user?.blog || "Not Available"}</StyledLinks>
             </div>
             <div className="twitter">
               <img src={TwitterIcon} alt="twitter icon" />
-              <a href={user?.twitter_username ? `https://twitter.com/${user?.twitter_username}` : '#'}>{user?.twitter_username || 'Not Available'}</a>
+              <StyledLinks mode={mode} available={!!user?.twitter_username} href={user?.twitter_username ? `https://twitter.com/${user?.twitter_username}` : '#'}>{user?.twitter_username || 'Not Available'}</StyledLinks>
             </div>
             <div>
               <img src={CompanyIcon} alt="company icon" />
-              <a href="#">{user?.company || 'Not Available'}</a>
+              <StyledLinks mode={mode} available={!!user?.company} href="#">{user?.company || 'Not Available'}</StyledLinks>
             </div>
           </div>
         </div>
     </StyledMain>
   )
 }
+
+const StyledLinks = styled.a<{mode: boolean; available: boolean}>`
+
+          text-decoration: none;
+          font-size: 13px;
+          color: ${({mode}) => mode ? "#ffffff" : "#4b6a9b" };
+          opacity: ${({ available }) => (available ? 1 : 0.5)};
+
+          &:hover{
+              cursor: pointer;
+              text-decoration: underline;
+          }
+
+          @media only screen and (min-width:768px){
+                font-size: 15px;
+          }
+`
+
 
 export default Main

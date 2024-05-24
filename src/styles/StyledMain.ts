@@ -201,9 +201,6 @@ const StyledMain = styled.main<IMain>`
                 grid-row: 1/2;
             }
 
-            a{
-                font-size: 15px;
-            }
         }
     }
 
@@ -245,7 +242,6 @@ const StyledMain = styled.main<IMain>`
 
             p{  
                 margin-left: 156px;
-                margin-top: -40px;
                 font-size: 15px;
                 line-height: 1.67;
             }
@@ -289,10 +285,6 @@ const StyledMain = styled.main<IMain>`
             .twitter{
                 grid-column: 2/2;
                 grid-row: 1/2;
-            }
-
-            a{
-                font-size: 15px;
             }
         }
     }
